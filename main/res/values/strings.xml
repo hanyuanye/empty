@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="API_URL">https://api.yelp.com/v3/businesses/search</string>
+    <string name="API_KEY">S_dizRofhCWfKnnPzgFM6SOTw5qhPECFdx28dqXfLYYYx2wLJKSogLKLSgtyA5e4B1GfrqSbZGQriWub4Tsge2BIT8Av7f5E1yZEh0nv-8WM75G62gg2jIcoYtCmWnYx</string>
+    <string name="Restaurant_Lists">Restaurant Lists</string>
+    <string name="Add_List_Button">Add List</string>
+    <string name="Business_Lists">Business</string>
+    <string name="Add_Business_Button">Add Restaurant</string>
+    <string name="Search_Business_Button">Search Restaurant</string>
+    <string name="Delete_Business_Button">Delete Business</string>
+</resources>
