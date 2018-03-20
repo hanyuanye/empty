@@ -7,19 +7,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.http.Url;
 
 
 
@@ -54,6 +47,18 @@ public class BusinessListAdapter extends BaseAdapter{
         notifyDataSetChanged();
     }
 
+    public boolean deleteItem(final String businessName) {
+        for (BusinessEntity entity : yelpBusiness) {
+            if (entity.yelpBusinessName.equals(businessName)) {
+                BusinessDatabase.getInstance(mContext).getBusinessDao().deleteBusiness(entity);
+                yelpBusiness.remove(entity);
+                notifyDataSetChanged();
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public int getCount() {
         if (yelpBusiness == null) {
@@ -79,7 +84,7 @@ public class BusinessListAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
         Log.d(TAG, "getting view");
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.layout, parent, false);
+            convertView = mInflater.inflate(R.layout.adapter_business_list, parent, false);
             holder = new BusinessListActivity.BusinessListViewHolder();
             holder.businessName = convertView.findViewById(R.id.business_list_name);
             holder.businessPicture =  convertView.findViewById(R.id.business_list_picture);

@@ -15,6 +15,9 @@ public interface BusinessDao {
     @Query ("Select * FROM BusinessEntity WHERE parentList=:parentList")
     List<BusinessEntity> getBusinessesFromList(String parentList);
 
+    @Query("Select * FROM BusinessEntity WHERE yelpBusinessName=:input")
+    List<BusinessEntity> getBusiness(String input)
+
     @Query("DELETE From BusinessEntity")
     void deleteAll();
 
@@ -22,7 +25,5 @@ public interface BusinessDao {
     void insertBusiness(BusinessEntity businessEntity);
 
     @Delete
-    void removeBusiness(BusinessEntity businessEntity);
-
-
+    void deleteBusiness(BusinessEntity businessEntity);
 }
