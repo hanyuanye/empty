@@ -1,4 +1,4 @@
-package com.example.hanyuany.myapplication;
+package com.example.hanyuany.myapplication2;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;

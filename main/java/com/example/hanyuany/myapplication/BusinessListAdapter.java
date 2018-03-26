@@ -1,4 +1,4 @@
-package com.example.hanyuany.myapplication;
+package com.example.hanyuany.myapplication2;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
-
 
 
 /**
@@ -57,6 +56,10 @@ public class BusinessListAdapter extends BaseAdapter{
             }
         }
         return false;
+    }
+
+    public ArrayList<BusinessEntity> getYelpBusiness() {
+        return yelpBusiness;
     }
 
     @Override

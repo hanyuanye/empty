@@ -1,4 +1,4 @@
-package com.example.hanyuany.myapplication;
+package com.example.hanyuany.myapplication2;
 
 import android.Manifest;
 import android.app.Activity;
@@ -17,7 +17,6 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 
 /**
  * Created by hanyuany on 15/03/2018.

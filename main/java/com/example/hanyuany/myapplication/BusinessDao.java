@@ -1,4 +1,4 @@
-package com.example.hanyuany.myapplication;
+package com.example.hanyuany.myapplication2;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
@@ -16,7 +16,7 @@ public interface BusinessDao {
     List<BusinessEntity> getBusinessesFromList(String parentList);
 
     @Query("Select * FROM BusinessEntity WHERE yelpBusinessName=:input")
-    List<BusinessEntity> getBusiness(String input)
+    List<BusinessEntity> getBusiness(String input);
 
     @Query("DELETE From BusinessEntity")
     void deleteAll();

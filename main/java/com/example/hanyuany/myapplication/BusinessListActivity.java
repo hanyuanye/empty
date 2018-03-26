@@ -1,12 +1,12 @@
-package com.example.hanyuany.myapplication;
+package com.example.hanyuany.myapplication2;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -35,7 +35,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.example.hanyuany.myapplication.MainActivity.LIST_TAG;
+import static com.example.hanyuany.myapplication2.MainActivity.LIST_TAG;
 
 public class BusinessListActivity extends AppCompatActivity {
     private static final String TAG = "tag";
@@ -64,8 +64,8 @@ public class BusinessListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_list);
         mAutoCompleteArray = new String[0];
-        mLocationTracker = new LocationTracker(this, BusinessListActivity.this);
-        mUserLocation = mLocationTracker.getLocation();
+//        mLocationTracker = new LocationTracker(this, BusinessListActivity.this);
+//        mUserLocation = mLocationTracker.getLocation();
 
         new deleteDatabaseTask().execute();
 
@@ -146,10 +146,18 @@ public class BusinessListActivity extends AppCompatActivity {
         searchBusinessButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ArrayList<String> listBusinessNames = new ArrayList<>();
+                for (BusinessEntity entity : mBusinessListAdapter.getYelpBusiness()) {
+                    listBusinessNames.add(entity.yelpBusinessName);
+                }
+                Intent intent = new Intent(BusinessListActivity.this, ShowBusinessActivity.class);
+                intent.putExtra("list", listBusinessNames);
+                intent.putExtra("latitude", TEST_LATITUDE);
+                intent.putExtra("longitude", TEST_LONGITUDE);
+                startActivity(intent);
             }
         });
-
+        deleteBusinessButton = findViewById(R.id.deleteBusiness);
         deleteBusinessButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -194,7 +202,7 @@ public class BusinessListActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        mLocationTracker.getLocation();
+ //       mLocationTracker.getLocation();
         super.onResume();
     }
 
