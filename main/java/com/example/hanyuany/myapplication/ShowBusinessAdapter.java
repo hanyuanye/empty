@@ -72,5 +72,4 @@ public class ShowBusinessAdapter extends BaseAdapter{
         holder.distanceTextView.setTextSize(mContext.getResources().getDimension(R.dimen.textsize));
         return convertView;
     }
-
 }

@@ -152,8 +152,8 @@ public class BusinessListActivity extends AppCompatActivity {
                 }
                 Intent intent = new Intent(BusinessListActivity.this, ShowBusinessActivity.class);
                 intent.putExtra("list", listBusinessNames);
-                intent.putExtra("latitude", TEST_LATITUDE);
-                intent.putExtra("longitude", TEST_LONGITUDE);
+                intent.putExtra("latitude", Double.toString(TEST_LATITUDE));
+                intent.putExtra("longitude", Double.toString(TEST_LONGITUDE));
                 startActivity(intent);
             }
         });
@@ -175,7 +175,7 @@ public class BusinessListActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String[] params = {input.getText().toString()};
-                        new deleteBusinessTask().execute(params);
+                        mBusinessListAdapter.deleteItem(params[0]);
                         dialogInterface.cancel();
                     }
                 });

@@ -2,6 +2,7 @@ package com.example.hanyuany.myapplication2;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ShowBusinessActivity extends AppCompatActivity {
+    private static String TAG = "showbiz";
     private ListView listView;
     private String mLatitude;
     private String mLongitude;
@@ -27,7 +29,6 @@ public class ShowBusinessActivity extends AppCompatActivity {
     private ArrayList<String> businessNameList;
     private ArrayList<BusinessData> businessDataList;
     private ShowBusinessAdapter mShowBusinessAdapter;
-    private int counter;
     private int responseCounter;
 
     @Override
@@ -51,11 +52,12 @@ public class ShowBusinessActivity extends AppCompatActivity {
         listView = findViewById(R.id.ListView);
         businessDataList = new ArrayList<>();
         HashMap<String, String> params;
-        for (counter = 0; counter < businessNameList.size(); counter++) {
+        responseCounter = 0;
+        for (int i = 0; i < businessNameList.size(); i++) {
             params = new HashMap<>();
             params.put("latitude", mLatitude);
             params.put("longitude", mLongitude);
-            params.put("term", businessNameList.get(counter));
+            params.put("term", businessNameList.get(i));
             mSearchCall = mYelpFusionApi.getBusinessSearch(params);
             mSearchCall.enqueue(searchResponseCallback);
         }
@@ -64,6 +66,7 @@ public class ShowBusinessActivity extends AppCompatActivity {
     Callback<SearchResponse> searchResponseCallback = new Callback<SearchResponse>() {
         @Override
         public void onResponse(Call<SearchResponse> call, Response<SearchResponse> response) {
+            Log.d(TAG, "response");
             responseCounter++;
             SearchResponse searchResponse = response.body();
             if (searchResponse.getBusinesses().isEmpty()) {
@@ -73,7 +76,9 @@ public class ShowBusinessActivity extends AppCompatActivity {
                 return;
             }
             for (Business business : searchResponse.getBusinesses()) {
-                if (business.getName() == businessNameList.get(counter)) {
+                Log.d(TAG, business.getName() + "  " + businessNameList.get(responseCounter-1));
+                if (business.getName().equals(businessNameList.get(responseCounter-1))) {
+                    Log.d(TAG, "hit");
                     BusinessData data = new BusinessData(business.getName(), business.getHours().get(0).getHoursType(), business.getDistance());
                     businessDataList.add(data);
                     if (responseCounter == businessNameList.size()) {
@@ -93,6 +98,7 @@ public class ShowBusinessActivity extends AppCompatActivity {
     };
 
     private void onAllApiCallsFinished() {
+        Log.d(TAG, "Calls finished");
         mShowBusinessAdapter = new ShowBusinessAdapter(this);
         listView.setAdapter(mShowBusinessAdapter);
         mShowBusinessAdapter.initiate(businessDataList);
